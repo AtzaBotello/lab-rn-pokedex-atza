@@ -6,7 +6,7 @@ export const initialValue: PokemonContextValue = {
     pokemons: [],
     lastPokemon: null,
     caughtPokemon: [],
-    isLoading: false,
+    isLoadingCtx: false,
   },
   setPokedex: () => {},
   addToTeam: () => {},

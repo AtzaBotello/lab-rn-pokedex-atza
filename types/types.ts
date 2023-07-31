@@ -26,7 +26,7 @@ export type PokemonState = {
   pokemons: GetPokemon[];
   lastPokemon: Pokemon | null;
   caughtPokemon: Pokemon[];
-  isLoading: boolean;
+  isLoadingCtx: boolean;
 };
 
 type GetAllType = {type: string; payload: {pokemons: GetPokemon[]}};
@@ -46,6 +46,7 @@ export type Pokemon = {
 export type GetPokemon = {
   name: string;
   url: string;
+  image?: string;
 };
 
 export type Sprites = {

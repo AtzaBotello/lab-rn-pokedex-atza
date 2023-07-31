@@ -7,7 +7,8 @@ import {useState, useEffect} from 'react';
 
 interface PokemonListProps {
   pokemonList: GetPokemon[];
-  navigation: HomeScreenNavigationProps;
+  //navigation: HomeScreenNavigationProps;
+  onPress: (id: string) => void;
 }
 
 interface PokemonListState {
@@ -16,27 +17,20 @@ interface PokemonListState {
   name: string;
 }
 
-export const PokemonList = ({pokemonList, navigation}: PokemonListProps) => {
+export const PokemonList = ({pokemonList, onPress}: PokemonListProps) => {
+
   const [pokemonImagesList, setPokemonImagesList] = useState<
     PokemonListState[]
   >([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const getPokemonImages = async () => {
-    const pokemonImages = await Promise.all(
-      pokemonList.map(async pokemon => {
-        const response = await fetch(pokemon.url);
-        const {id, name, sprites} = await response.json();
-        return {id, name, image: sprites.front_default};
-      }),
-    );
+  const getPokemonImages = () => {
 
-    setPokemonImagesList([...pokemonImages]);
     setIsLoading(false);
   };
 
   const renderItem = ({item}) => {
-    return <PokemonCard pkmnInfo={item} navigation={navigation} />;
+    return <PokemonCard pkmnInfo={item} onPress={onPress} />;
   };
 
   useEffect(() => {
@@ -44,11 +38,14 @@ export const PokemonList = ({pokemonList, navigation}: PokemonListProps) => {
   }, []);
 
   return !isLoading ? (
-    <View>
+    <View style={styles.pokemonListContainer}>
       <FlatList
-        data={pokemonImagesList}
+        data={pokemonList}
         renderItem={renderItem}
+        numColumns={2}
         keyExtractor={item => item.name}
+        showsVerticalScrollIndicator={false}
+        style={styles.pokemonList}
       />
     </View>
   ) : (
@@ -62,5 +59,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     margin: 10,
     color: 'white',
+  },
+  pokemonListContainer: {
+    width: '100%',
   },
 });

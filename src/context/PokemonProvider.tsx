@@ -13,7 +13,7 @@ export const PokemonProvider = ({children}: ChildrenComponent) => {
     pokemons: [],
     lastPokemon: null,
     caughtPokemon: [],
-    isLoading: true,
+    isLoadingCtx: true,
   });
 
   const setPokedex = (pokemons: GetPokemon[]) => {

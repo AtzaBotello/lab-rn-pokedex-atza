@@ -23,7 +23,7 @@ export const pokemonReducer = (
     case reducerTypes.SHOW:
       return {
         ...state,
-        isLoading: action.payload.isLoading,
+        isLoadingCtx: action.payload.show,
       };
     default:
       return state;

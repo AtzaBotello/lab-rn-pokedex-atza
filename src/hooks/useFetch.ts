@@ -1,9 +1,9 @@
 import {useState, useEffect, useContext} from 'react';
 import {GetPokemon} from '../../types/types';
-import { PokemonContext } from '../context/PokemonContext';
+import {PokemonContext} from '../context/PokemonContext';
 
 export const useFecth = (url: string) => {
-  const {setPokedex, setShow} = useContext(PokemonContext);
+  // const {setPokedex, setShow} = useContext(PokemonContext);
   const [state, setState] = useState({
     data: [] as GetPokemon[],
     isLoading: true,
@@ -26,8 +26,7 @@ export const useFecth = (url: string) => {
       hasError: false,
     });
 
-    setPokedex(data.results);
-    setShow(false);
+    console.log("finish the fetch request");
   };
 
   useEffect(() => {
